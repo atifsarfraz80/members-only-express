@@ -5,7 +5,12 @@ import LocalStrategy from "passport-local";
 import "../passport.js";
 
 loginRouter.get("/login", (req, res) => {
-  res.render("logform", { title: "Login!", isSignUp: false });
+  res.render("logform", {
+    title: "Login!",
+    isSignUp: false,
+    errors: [],
+    formData: {},
+  });
 });
 
 loginRouter.post(

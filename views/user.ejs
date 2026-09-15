@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>User</title>
-  </head>
-  <body>
-    <% if (locals.user) {%>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/log-out">LOG OUT</a>
-    <a href="/member">Become a Member here!</a>
-    <a href="/messages">Compose Messages Here</a>
-  <% } else { %>
-    <a href="/login">please log in here</a>
-    <%}%>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="glass-panel">
+    <% if (locals.user) { %>
+      <h1>Welcome</h1>
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 500;"><%= user.first_name %> <%= user.last_name %></h2>
+        <p style="color: var(--text-secondary); margin-top: 0.25rem;"><%= user.username %></p>
+        <div style="margin-top: 0.75rem;">
+          <% if (user.is_admin) { %>
+            <span class="badge badge-admin">Admin</span>
+          <% } %>
+          <% if (user.membership_status) { %>
+            <span class="badge badge-member">Club Member</span>
+          <% } else { %>
+            <span class="badge" style="background: rgba(148, 163, 184, 0.2); color: var(--text-secondary);">Standard User</span>
+          <% } %>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <a href="/get-messages" class="btn-primary">View Messages</a>
+        <a href="/create-message" class="btn-primary" style="background: rgba(255, 255, 255, 0.08);">Post Message</a>
+
+        <% if (!user.membership_status) { %>
+          <a href="/member" class="btn-primary" style="background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);">
+            Enter Secret Passcode
+          </a>
+        <% } %>
+
+        <a href="/log-out" class="link-alt" style="margin-top: 0.5rem;">Log Out</a>
+      </div>
+    <% } else { %>
+      <h1>Access Denied</h1>
+      <a href="/login" class="btn-primary">Please Log In</a>
+    <% } %>
+  </div>
+</body>
 </html>

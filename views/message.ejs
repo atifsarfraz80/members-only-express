@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club Messages</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="glass-panel glass-panel-wide">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <h1>Club Feed</h1>
+      <a href="/user" class="btn-primary" style="width: auto; padding: 0.5rem 1rem;">Dashboard</a>
+    </div>
+
+    <div class="message-list">
+      <% if (allmessages.length === 0) { %>
+        <p style="text-align: center; color: var(--text-secondary);">No messages posted yet. Be the first!</p>
+      <% } %>
+
+      <% allmessages.forEach((message) => { %>
+        <div class="message-card">
+          <div class="message-header">
+            <div>
+              <% if (locals.user && (user.membership_status || user.is_admin)) { %>
+                <span class="author-tag"><%= message.first_name %> <%= message.last_name %> (<%= message.author_username %>)</span>
+                <span>• <%= new Date(message.timestamp).toLocaleString() %></span>
+              <% } else { %>
+                <span style="font-style: italic; color: var(--text-secondary);">[Author hidden - Members only]</span>
+              <% } %>
+            </div>
+
+            <% if (locals.user && user.is_admin) { %>
+              <form action="/deletemsg/<%= message.id %>" method="POST" style="margin: 0;">
+                <button type="submit" class="btn-danger">Delete</button>
+              </form>
+            <% } %>
+          </div>
+
+          <h3 style="color: #fff; margin-bottom: 0.25rem;"><%= message.title %></h3>
+          <p class="message-body"><%= message.text %></p>
+        </div>
+      <% }) %>
+    </div>
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <a href="/create-message" class="btn-primary" style="display: inline-block; width: auto; padding: 0.7rem 1.5rem;">Compose Message</a>
+    </div>
+  </div>
+</body>
+</html>

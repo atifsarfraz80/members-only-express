@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title><%if(isSignUp) { %> Sign Up <% } else { %> Login in <% } %></title>
-  </head>
-  <body>
-    <h1><%if(isSignUp) { %> Sign Up <% } else { %> Login in <% } %></h1>
-    <form action="<%if(isSignUp) { %> /sign-up <% } else { %> /login<% } %>" method="POST">
-      <%if(isSignUp) { %>
-        <label for="first_name">First Name</label>
-        <input id="first_name" name="first_name" placeholder="Atif" type="text" />
-        <label for="last_name">Last Name</label>
-        <input
-          id="last_name"
-          name="last_name"
-          placeholder="Sarfraz"
-          type="text"
-        />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= isSignUp ? "Sign Up" : "Login" %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="glass-panel">
+    <h1><%= isSignUp ? "Create Account" : "Welcome Back" %></h1>
+
+    <% if (locals.errors && errors.length > 0) { %>
+      <div class="error-box">
+        <% errors.forEach(error => { %>
+          <p>• <%= error.msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form action="<%= isSignUp ? '/sign-up' : '/login' %>" method="POST">
+      <% if (isSignUp) { %>
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input 
+            id="first_name" 
+            name="first_name" 
+            type="text" 
+            placeholder="Jane" 
+            value="<%= locals.formData ? formData.first_name || '' : '' %>" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input 
+            id="last_name" 
+            name="last_name" 
+            type="text" 
+            placeholder="Doe" 
+            value="<%= locals.formData ? formData.last_name || '' : '' %>" 
+            required 
+          />
+        </div>
       <% } %>
-      <label for="username">Username</label>
-      <input id="username" name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button type="submit"><%if(isSignUp) { %> Sign Up <% } else { %> Login <% } %></button>
+
+      <div class="form-group">
+        <label for="username">Email Address</label>
+        <input 
+          id="username" 
+          name="username" 
+          type="email" 
+          placeholder="name@example.com" 
+          value="<%= locals.formData ? formData.username || '' : '' %>" 
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required />
+      </div>
+
+      <% if (isSignUp) { %>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" name="confirmPassword" type="password" required />
+        </div>
+      <% } %>
+
+      <button type="submit" class="btn-primary"><%= isSignUp ? "Sign Up" : "Log In" %></button>
     </form>
 
-    <%if(isSignUp) { %> <a href="/login">Already have an account> Login Here!</a> <% } else { %> <a href="/sign-up">Don't have an account? Sign up Here!</a> <% } %>
-  </body>
+    <% if (isSignUp) { %>
+      <a href="/login" class="link-alt">Already have an account? Log In</a>
+    <% } else { %>
+      <a href="/sign-up" class="link-alt">Don't have an account? Sign Up</a>
+    <% } %>
+  </div>
+</body>
 </html>

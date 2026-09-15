@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Club Membership</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="glass-panel">
+      <h1>Join the Club</h1>
+      <p
+        style="
+          color: var(--text-secondary);
+          text-align: center;
+          margin-bottom: 1.5rem;
+          font-size: 0.9rem;
+        "
+      >
+        Enter the secret clubhouse passcode to reveal author names and dates
+        across the board.
+      </p>
+
+      <form action="/member" method="POST">
+        <div class="form-group">
+          <label for="key">Secret Passcode</label>
+          <input
+            id="key"
+            name="key"
+            type="password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-primary">Unlock Membership</button>
+      </form>
+
+      <a href="/user" class="link-alt">Return to Dashboard</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Message</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="glass-panel">
+      <h1>Compose Post</h1>
+
+      <form action="/create-message" method="POST">
+        <div class="form-group">
+          <label for="title">Message Title</label>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Something interesting..."
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="text">Body Text</label>
+          <textarea
+            id="text"
+            name="text"
+            rows="5"
+            placeholder="Write your thoughts..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Publish Message</button>
+      </form>
+
+      <a href="/get-messages" class="link-alt">Cancel and Return</a>
+    </div>
+  </body>
+</html>
