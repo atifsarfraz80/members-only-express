@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%if(isSignUp) { %> Sign Up <% } else { %> Login in <% } %></title>
+  </head>
+  <body>
+    <h1><%if(isSignUp) { %> Sign Up <% } else { %> Login in <% } %></h1>
+    <form action="<%if(isSignUp) { %> /sign-up <% } else { %> /login<% } %>" method="POST">
+      <%if(isSignUp) { %>
+        <label for="first_name">First Name</label>
+        <input id="first_name" name="first_name" placeholder="Atif" type="text" />
+        <label for="last_name">Last Name</label>
+        <input
+          id="last_name"
+          name="last_name"
+          placeholder="Sarfraz"
+          type="text"
+        />
+      <% } %>
+      <label for="username">Username</label>
+      <input id="username" name="username" placeholder="username" type="text" />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" />
+      <button type="submit"><%if(isSignUp) { %> Sign Up <% } else { %> Login <% } %></button>
+    </form>
+
+    <%if(isSignUp) { %> <a href="/login">Already have an account> Login Here!</a> <% } else { %> <a href="/sign-up">Don't have an account? Sign up Here!</a> <% } %>
+  </body>
+</html>

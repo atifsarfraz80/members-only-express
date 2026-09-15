@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User</title>
+  </head>
+  <body>
+    <% if (locals.user) {%>
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <a href="/log-out">LOG OUT</a>
+    <a href="/member">Become a Member here!</a>
+    <a href="/messages">Compose Messages Here</a>
+  <% } else { %>
+    <a href="/login">please log in here</a>
+    <%}%>
+  </body>
+</html>
